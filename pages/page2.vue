@@ -1,21 +1,19 @@
 <template>
   <div class="page-test">
-    <nuxt-link to="/">
-      Page 1
-    </nuxt-link>
-
     {{ user }}
   </div>
 </template>
 
 <script lang="ts">
 import { Component, Vue } from "nuxt-property-decorator"
-import store from "~/controllers"
+import controllers from "~/controllers"
 
-@Component
+@Component({
+  layout: 'no-header-layout'
+})
 export default class Index extends Vue {
   get user() {
-    return store.value.user
+    return controllers.user
   }
 }
 </script>

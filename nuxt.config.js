@@ -23,7 +23,10 @@ export default {
   css: [],
 
   // Plugins to run before rendering page: https://go.nuxtjs.dev/config-plugins
-  plugins: [],
+  plugins: [
+    { src: '~/plugins/controllers.ts' },
+    { src: '@/plugins/client.ts', mode: 'client' },
+  ],
 
   middleware: 'checkData',
   router: {
@@ -31,7 +34,10 @@ export default {
   },
 
   // Auto import components: https://go.nuxtjs.dev/config-components
-  components: true,
+  components: [
+    '~/components',
+    '~/layouts'
+  ],
 
   // Modules for dev and build (recommended): https://go.nuxtjs.dev/config-modules
   buildModules: [
@@ -66,6 +72,6 @@ export default {
 
   proxy: {
     // Simple proxy
-    '/api': 'https://test.zsmartex.tech',
+    '/api': 'http://learn.huuhait.me',
   }
 }

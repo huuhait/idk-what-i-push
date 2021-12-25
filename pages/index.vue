@@ -1,31 +1,38 @@
 <template>
   <div class="page-test">
-    <nuxt-link to="/page2">
-      Page 2
-    </nuxt-link>
+    <form @submit.prevent="onSubmit">
+      <Input v-model="email" type="text" label="Email" />
+      <br>
+      <Input v-model="password" type="password" label="Password" />
+      <br>
+      <button type="submit">Submit</button>
+    </form>
 
     {{ user }}
-    <button @click="ChangeDataUser">Change</button>
   </div>
 </template>
 
 <script lang="ts">
-import { Component, Vue } from "nuxt-property-decorator"
-import store from "@/controllers";
+import { Component, Ref, Vue } from "nuxt-property-decorator"
+import controllers from "@/controllers";
+import Input from "~/components/Input.vue";
 
 @Component
 export default class Index extends Vue {
+  @Ref("email-input") readonly EmailInput!: Input;
+
+  email = "";
+  password = "";
+
   get user() {
-    return store.value.user
+    return controllers.user
   }
 
-  ChangeDataUser() {
-    store.value.user = {
-      state: "xxx",
-      first_name: "John",
-      last_name: "Wick"
-    }
+  async onSubmit() {
+    await controllers.Login(this.email, this.password);
   }
+
+  // http://learn.huuhait.me/api/v2/identity/session
 }
 </script>
 

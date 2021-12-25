@@ -1,13 +1,7 @@
-import store from "@/controllers";
+import { Context } from "@nuxt/types";
+import controllers from "@/controllers";
 
-export default function() {
-  if (!store.value.first_route) return;
+export default async function(context: Context) {
 
-  store.value.first_route = false;
-
-  store.value.user = {
-    state: "active",
-    first_name: "JJJ",
-    last_name: "LKLL"
-  };
+  await controllers.GetLogged(context.$axios);
 }
